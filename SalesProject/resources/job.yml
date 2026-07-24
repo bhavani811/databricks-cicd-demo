@@ -1,0 +1,24 @@
+resources:
+  jobs:
+    Sales_Pipeline:
+      name: Sales Pipeline
+      tasks:
+        - task_key: Bronze_Notebook
+          notebook_task:
+            notebook_path: /Workspace/Users/bhavanidk65@gmail.com/SalesProject/Bronze/01_Bronze
+            source: WORKSPACE
+        - task_key: Silver_Notebook
+          depends_on:
+            - task_key: Bronze_Notebook
+          notebook_task:
+            notebook_path: /Workspace/Users/bhavanidk65@gmail.com/SalesProject/Silver/02_Silver
+            source: WORKSPACE
+        - task_key: Gold_Notebook
+          depends_on:
+            - task_key: Silver_Notebook
+          notebook_task:
+            notebook_path: /Workspace/Users/bhavanidk65@gmail.com/SalesProject/Gold/03_Gold
+            source: WORKSPACE
+      queue:
+        enabled: true
+      performance_target: PERFORMANCE_OPTIMIZED
